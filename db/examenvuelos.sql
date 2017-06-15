@@ -11,6 +11,9 @@ create table usuarios
     ,   password    char(32)         not null
 );
 
+insert into usuarios (nombre, password)
+    values ('pepe',  md5('pepe'));
+
 drop table if exists aeropuertos cascade;
 
 create table aeropuertos
