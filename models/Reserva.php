@@ -36,8 +36,8 @@ class Reserva extends \yii\db\ActiveRecord
             [['usuario_id', 'vuelo_id'], 'integer'],
             [['fecha_hora'], 'safe'],
             [['asiento'], 'number'],
-            [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['usuario_id' => 'id']],
-            [['vuelo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Vuelos::className(), 'targetAttribute' => ['vuelo_id' => 'id']],
+            [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['usuario_id' => 'id']],
+            [['vuelo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Vuelo::className(), 'targetAttribute' => ['vuelo_id' => 'id']],
         ];
     }
 
@@ -60,7 +60,7 @@ class Reserva extends \yii\db\ActiveRecord
      */
     public function getUsuario()
     {
-        return $this->hasOne(Usuarios::className(), ['id' => 'usuario_id'])->inverseOf('reservas');
+        return $this->hasOne(Usuario::className(), ['id' => 'usuario_id'])->inverseOf('reservas');
     }
 
     /**
@@ -68,6 +68,6 @@ class Reserva extends \yii\db\ActiveRecord
      */
     public function getVuelo()
     {
-        return $this->hasOne(Vuelos::className(), ['id' => 'vuelo_id'])->inverseOf('reservas');
+        return $this->hasOne(Vuelo::className(), ['id' => 'vuelo_id'])->inverseOf('reservas');
     }
 }
