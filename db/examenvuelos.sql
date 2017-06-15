@@ -23,6 +23,8 @@ create table aeropuertos
     ,   den_aero    varchar(32)    not null
 );
 
+insert into aeropuertos (id_aero, den_aero)
+    values ('SAS',  'Sevilla'), ('SCB', 'Barcelona');
 
 drop table if exists companias cascade;
 
@@ -32,6 +34,8 @@ create table companias
     ,   den_comp    varchar(32)          not null
 );
 
+insert into companias (den_comp)
+    values ('Spanair'), ('Iberia');
 
 drop table if exists vuelos cascade;
 
@@ -53,6 +57,10 @@ create table vuelos
     ,   plazas         numeric(3)   not null
     ,   precio        numeric(6,2) not null
 );
+
+insert into vuelos (id_vuelo, orig_id, dest_id, comp_id, salida, llegada,plazas,precio)
+    values('AA1111', 1,2,2,current_timestamp + '1 day'::interval, current_timestamp + '2 day'::interval,
+                100,50);
 
 drop table if exists reservas cascade;
 
