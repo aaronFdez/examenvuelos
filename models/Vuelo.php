@@ -44,9 +44,9 @@ class Vuelo extends \yii\db\ActiveRecord
             [['plazas', 'precio'], 'number'],
             [['id_vuelo'], 'string', 'max' => 6],
             [['id_vuelo'], 'unique'],
-            [['orig_id'], 'exist', 'skipOnError' => true, 'targetClass' => Aeropuertos::className(), 'targetAttribute' => ['orig_id' => 'id']],
-            [['dest_id'], 'exist', 'skipOnError' => true, 'targetClass' => Aeropuertos::className(), 'targetAttribute' => ['dest_id' => 'id']],
-            [['comp_id'], 'exist', 'skipOnError' => true, 'targetClass' => Companias::className(), 'targetAttribute' => ['comp_id' => 'id']],
+            [['orig_id'], 'exist', 'skipOnError' => true, 'targetClass' => Aeropuerto::className(), 'targetAttribute' => ['orig_id' => 'id']],
+            [['dest_id'], 'exist', 'skipOnError' => true, 'targetClass' => Aeropuerto::className(), 'targetAttribute' => ['dest_id' => 'id']],
+            [['comp_id'], 'exist', 'skipOnError' => true, 'targetClass' => Compania::className(), 'targetAttribute' => ['comp_id' => 'id']],
         ];
     }
 
@@ -57,12 +57,12 @@ class Vuelo extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'id_vuelo' => 'Id Vuelo',
-            'orig_id' => 'Orig ID',
-            'dest_id' => 'Dest ID',
-            'comp_id' => 'Comp ID',
-            'salida' => 'Salida',
-            'llegada' => 'Llegada',
+            'id_vuelo' => 'Número de Vuelo',
+            'orig_id' => 'Aeropuerto de origen',
+            'dest_id' => 'Aeropuerto de destino',
+            'comp_id' => 'Compañía',
+            'salida' => 'Hora de salida',
+            'llegada' => 'Hora de llegada',
             'plazas' => 'Plazas',
             'precio' => 'Precio',
         ];
@@ -73,30 +73,30 @@ class Vuelo extends \yii\db\ActiveRecord
      */
     public function getReservas()
     {
-        return $this->hasMany(Reservas::className(), ['vuelo_id' => 'id'])->inverseOf('vuelo');
+        return $this->hasMany(Reserva::className(), ['vuelo_id' => 'id'])->inverseOf('vuelo');
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getOrig()
+    public function getOrigen()
     {
-        return $this->hasOne(Aeropuertos::className(), ['id' => 'orig_id'])->inverseOf('vuelos');
+        return $this->hasOne(Aeropuerto::className(), ['id' => 'orig_id'])->inverseOf('esOrigenDe');
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getDest()
+    public function getDestino()
     {
-        return $this->hasOne(Aeropuertos::className(), ['id' => 'dest_id'])->inverseOf('vuelos0');
+        return $this->hasOne(Aeropuerto::className(), ['id' => 'dest_id'])->inverseOf('esDestinoDe');
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getComp()
+    public function getCompania()
     {
-        return $this->hasOne(Companias::className(), ['id' => 'comp_id'])->inverseOf('vuelos');
+        return $this->hasOne(Compania::className(), ['id' => 'comp_id'])->inverseOf('vuelos');
     }
 }

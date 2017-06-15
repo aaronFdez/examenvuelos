@@ -44,24 +44,24 @@ class Aeropuerto extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'id_aero' => 'Id Aero',
-            'den_aero' => 'Den Aero',
+            'id_aero' => 'Identificador del aeropuerto',
+            'den_aero' => 'Nombre del  aeropuerto',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVuelos()
+    public function getEsOrigenDe()
     {
-        return $this->hasMany(Vuelos::className(), ['orig_id' => 'id'])->inverseOf('orig');
+        return $this->hasMany(Vuelo::className(), ['orig_id' => 'id'])->inverseOf('origen');
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVuelos0()
+    public function getEsDestinoDe()
     {
-        return $this->hasMany(Vuelos::className(), ['dest_id' => 'id'])->inverseOf('dest');
+        return $this->hasMany(Vuelo::className(), ['dest_id' => 'id'])->inverseOf('destino');
     }
 }

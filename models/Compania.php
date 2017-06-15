@@ -49,6 +49,6 @@ class Compania extends \yii\db\ActiveRecord
      */
     public function getVuelos()
     {
-        return $this->hasMany(Vuelos::className(), ['comp_id' => 'id'])->inverseOf('comp');
+        return $this->hasMany(Vuelo::className(), ['comp_id' => 'id'])->inverseOf('compania');
     }
 }

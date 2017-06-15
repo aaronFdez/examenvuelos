@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Aeropuerto */
+/* @var $model app\models\Vuelo */
 
-$this->title = 'Aeropuerto de ' . $model->den_aero;
-$this->params['breadcrumbs'][] = ['label' => 'Aeropuertos', 'url' => ['index']];
+$this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Vuelos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="aeropuerto-view">
+<div class="vuelo-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -28,9 +28,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            
-            'id_aero',
-            'den_aero',
+            'id_vuelo',
+            'orig_id',
+            'dest_id',
+            'comp_id',
+            'salida',
+            'llegada',
+            'plazas',
+            'precio',
         ],
     ]) ?>
 
