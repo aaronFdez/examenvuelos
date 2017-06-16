@@ -99,4 +99,23 @@ class Vuelo extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Compania::className(), ['id' => 'comp_id'])->inverseOf('vuelos');
     }
+
+    public function getPlazasOcupadas()
+    {
+        return $this->getReservas()->select('asiento')->column();
+    }
+
+    public function getPlazasLibre()
+    {
+        // $ocupadas = $this->getPlazasOcupadas();
+        // $libres = [];
+        //
+        // for ($i=0; $i <$this->plazas ; $i++) {
+        //     if (!in_array($i, $ocupadas)) {
+        //         $libres[] = $i;
+        //     }
+        // }
+        // return $libres;
+         return array_values(array_diff(range(1, $this->plazas), $this->plazasOcupadas));
+    }//fin getPlazasOcupadas
 }
